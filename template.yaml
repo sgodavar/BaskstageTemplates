@@ -37,9 +37,10 @@ spec:
         deployType:
           title: Deploy Type
           type: string
-          default: webapp
+          default: AKS
           enum:
-            - webapp
+            - Webapp
+            - AKS
           description: Select the deployment target
           validation:
             required: true
@@ -60,6 +61,16 @@ spec:
           default: Azure Disks
           enum:
             - Azure Disks
+        StorageSku:
+          title: Storage Plan
+          type: string
+          default: Standard
+          enum:
+            - Standard
+            - Premium
+          description: Select the target service plan for Storage
+          validation:
+            required: true
         database:
           title: Database
           type: string
@@ -77,16 +88,7 @@ spec:
           description: Select the target service plan for Database
           validation:
             required: true
-        StorageSku:
-          title: Storage Plan
-          type: string
-          default: Standard
-          enum:
-            - Standard
-            - Premium
-          description: Select the target service plan for Storage
-          validation:
-            required: true
+
         services:
           title: Select Services
           type: array
@@ -150,6 +152,8 @@ spec:
           description: Provide the docker repo to push & pull image
           validation:
             required: true
+              properties:
+ 
         deployEnv:
           title: Deploy Environment
           type: string
