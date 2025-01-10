@@ -144,9 +144,10 @@ spec:
           items:
             type: string
             enum:
-              - production
-              - staging
-              - development
+              - 'Key Vault'
+              - 'CDN'
+              - 'App Insights'
+              - 'Load Balancer'
           uniqueItems: true
           ui:widget: checkboxes        
     # - title: Pipeline Configuration
