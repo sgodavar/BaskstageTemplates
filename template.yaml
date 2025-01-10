@@ -37,7 +37,7 @@ spec:
         deployType:
           title: Deploy Type
           type: string
-          default: AKS
+          default: Webapp
           enum:
             - Webapp
             - AKS
