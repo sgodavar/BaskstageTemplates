@@ -147,8 +147,8 @@ spec:
               - 'CDN'
               - 'App Insights'
               - 'Load Balancer'
-           uniqueItems: true
-           ui:widget: checkboxes
+            uniqueItems: true
+            ui:widget: checkboxes
 
         
     # - title: Pipeline Configuration
