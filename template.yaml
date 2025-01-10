@@ -151,9 +151,7 @@ spec:
             - backstagdeveacr.azurecr.io
           description: Provide the docker repo to push & pull image
           validation:
-            required: true
-              properties:
- 
+            required: true 
         deployEnv:
           title: Deploy Environment
           type: string
