@@ -150,8 +150,6 @@ spec:
           description: Provide the docker repo to push & pull image
           validation:
             required: true
-              properties:
- 
         deployEnv:
           title: Deploy Environment
           type: string
