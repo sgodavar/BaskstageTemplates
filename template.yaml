@@ -19,9 +19,9 @@ spec:
         - description
       properties:
         name:
-          title: Service Name
+          title: Service Nameee
           type: string
-          description: Unique name for the service.
+          description: Unique name for the serviceee.
         owner:
           title: Owner
           type: string
