@@ -110,7 +110,6 @@ spec:
           description: Select the pipeline system to use
           validation:
             required: true
-      properties:
         buildType:
           title: code Build Type
           type: string
