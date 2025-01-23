@@ -77,6 +77,15 @@ spec:
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           owner: ${{ parameters.owner }}
 
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts:
+          - github.com
+        description: This is ${{ parameters.component_id }}
+        repoUrl: ${{ parameters.repoUrl }}
+
     - id: copy-file
       name: Copy File
       action: github:copy-file
@@ -86,15 +95,6 @@ spec:
         targetRepo: ${{ parameters.repoUrl }}
         targetPath: ${{ parameters.targetPath }}
         token: ${{ secrets.githubToken }}
-
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts:
-          - github.com
-        description: This is ${{ parameters.component_id }}
-        repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
       name: Register
