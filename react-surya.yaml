@@ -92,7 +92,7 @@ spec:
       input:
         sourceRepo: ${{ parameters.sourceRepo }}
         sourcePath: ${{ parameters.sourcePath }}
-        targetRepo: ${{ parameters.repoUrl }}
+        targetRepo: ${{ steps.publish.output.remoteUrl }}
         targetPath: ${{ parameters.targetPath }}
         token: ${{ secrets.githubToken }}
 
