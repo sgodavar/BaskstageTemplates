@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: create-react-app-template-custom
-  title: Create React App Template-custom
+  name: create-react-app-template-custom-merge
+  title: Create React App Template-custom-merge
   description: Create a new CRA website project
   tags:
     - react
@@ -44,20 +44,25 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-    - title: Copy File Configuration
+    - title: MErge File Configuration
       required:
         - sourceRepo
-        - sourcePath
+        - sourcePath1
+        - sourcePath2
         - targetPath
       properties:
         sourceRepo:
           title: Source Repository
           type: string
           description: The GitHub repository to copy the file from.
-        sourcePath:
-          title: Source File Path
+        sourcePath1:
+          title: Source File Path 1 
           type: string
-          description: Path to the file in the source repository.
+          description: Path to the file 1 in the source repository.
+        sourcePath2:
+          title: Source File Path 2
+          type: string
+          description: Path to the file 2 in the source repository.
         targetPath:
           title: Target File Path
           type: string
@@ -86,12 +91,13 @@ spec:
         description: This is ${{ parameters.component_id }}
         repoUrl: ${{ parameters.repoUrl }}
 
-    - id: copy-file
-      name: Copy File
-      action: github:copy-file
+    - id: merge-file
+      name: Merge File
+      action: github:merge-files
       input:
         sourceRepo: ${{ parameters.sourceRepo }}
-        sourcePath: ${{ parameters.sourcePath }}
+        sourcePath1: ${{ parameters.sourcePath }}
+        sourcePath2: ${{ parameters.sourcePath2 }}
         targetRepo: ${{ steps.publish.output.remoteUrl }}
         targetPath: ${{ parameters.targetPath }}
         token: ${{ secrets.githubToken }}
