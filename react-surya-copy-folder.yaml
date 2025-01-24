@@ -44,7 +44,7 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-    - title: MErge File Configuration
+    - title: Copy Folder Configuration
       required:
         - sourceRepo
         - sourceFolder
@@ -55,13 +55,13 @@ spec:
           type: string
           description: The GitHub repository to copy the file from.
         sourceFolder:
-          title: Source File Path 1 
+          title: Source Folder 
           type: string
-          description: Path to the file 1 in the source repository.
+          description: Path to the folder in the source repository.
         targetFolder:
-          title: Target File Path
+          title: Target File Folder
           type: string
-          description: Path to copy the file to in the target repository.
+          description: Path to copy the Folder in the target repository.
 
   steps:
     - id: template
@@ -86,9 +86,9 @@ spec:
         description: This is ${{ parameters.component_id }}
         repoUrl: ${{ parameters.repoUrl }}
 
-    - id: merge-file
-      name: Merge File
-      action: github:merge-files
+    - id: copy-folder
+      name: Copy Folder
+      action: github:copy-folder
       input:
         sourceRepo: ${{ parameters.sourceRepo }}
         sourceFolder: ${{ parameters.sourceFolder }}
