@@ -96,18 +96,13 @@ spec:
       action: github:merge-files
       input:
         sourceRepo: ${{ parameters.sourceRepo }}
-        sourcePath1: ${{ parameters.sourcePath }}
+        sourcePath1: ${{ parameters.sourcePath1 }}
         sourcePath2: ${{ parameters.sourcePath2 }}
         targetRepo: ${{ steps.publish.output.remoteUrl }}
         targetPath: ${{ parameters.targetPath }}
         token: ${{ secrets.githubToken }}
 
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: "/catalog-info.yaml"
+
 
   output:
     links:
