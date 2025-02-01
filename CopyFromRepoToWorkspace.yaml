@@ -74,6 +74,15 @@ spec:
         owner: ${{ parameters.owner }}
         sourcePath: ${{ parameters.sourcePath }}
         destinationPath: ./workspace/${{ parameters.componentName }}
+        
+    - id: copy-from-github
+      name: Copy Files from GitHub
+      action: custom:copy-from-github
+      input:
+        repo: ${{ parameters.repo }}
+        owner: ${{ parameters.owner }}
+        sourcePath: temp
+        destinationPath: ./workspace/${{ parameters.componentName }}
 
     - id: publish
       name: Publish
