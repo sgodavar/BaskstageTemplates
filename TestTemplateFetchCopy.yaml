@@ -61,7 +61,7 @@ spec:
         
     - id: copy-extra-files
       name: Copy Extra Files
-      action: fs:copy
+      action: custom:copy-folder
       input:
         source: ./infra  # Folder containing extra files
         target: ./fetch-template  # Copying into the in-memory workspace
