@@ -18,13 +18,18 @@ spec:
 
   steps:
     # Step 1: Dynamically Select the Child Template
-    - id: fetch-child-template
-      name: Load Child Template
-      action: fetch:template
-      input:
-        url: ${{ parameters.projectType == "frontend" ? "./templates/frontend-template.yaml" : "./templates/backend-template.yaml" }}
-        values:
-          componentName: ${{ parameters.componentName }}
+   - id: select-template-path
+     name: Select Template Path
+     action: roadiehq:utils:render-template
+     input:
+     template: |
+          {% if parameters.projectType == "frontend" %}
+            ./templates/frontend-template.yaml
+          {% else %}
+            ./templates/backend-template.yaml
+          {% endif %}
+     output:
+      templatePath: ${{ steps.select-template-path.output.rendered }}
 
     # Step 2: Publish the Component (Common Step)
     - id: publish-to-github
