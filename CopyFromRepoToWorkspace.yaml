@@ -1,0 +1,53 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: copy-from-github
+  title: Copy Files from GitHub to Workspace
+  description: Copies files from a GitHub repo folder to the local workspace.
+spec:
+  parameters:
+    - title: Repository Information
+      required: ["componentName", "repo", "owner", "sourcePath", "destinationPath"]
+      properties:
+        componentName:
+          type: string
+          description: Name of the component.
+        repo:
+          type: string
+          description: GitHub repository name (e.g., `my-repo`).
+        owner:
+          type: string
+          description: GitHub organization or user (e.g., `my-org`).
+        sourcePath:
+          type: string
+          description: Path inside the repo to copy files from (e.g., `templates/base`).
+        destinationPath:
+          type: string
+          description: Path in the workspace to copy files to.
+
+  steps:
+    # Step 1: Clone and Copy Files from GitHub Repo
+    - id: copy-from-github
+      name: Copy Files from GitHub
+      action: custom:copy-from-github
+      input:
+        repo: ${{ parameters.repo }}
+        owner: ${{ parameters.owner }}
+        sourcePath: ${{ parameters.sourcePath }}
+        destinationPath: ./workspace/${{ parameters.componentName }}
+
+    # Step 2: Publish the New Component to GitHub
+    - id: publish-to-github
+      name: Publish Component
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        repoUrl: github.com/${{ parameters.owner }}/${{ parameters.componentName }}
+        branch: main
+        repoVisibility: public
+        sourcePath: ./workspace/${{ parameters.componentName }}
+
+  output:
+    links:
+      - title: Repository
+        url: https://github.com/${{ parameters.owner }}/${{ parameters.componentName }}
