@@ -32,12 +32,12 @@ spec:
         componentName: ${{ parameters.componentName }}
 
     # Step 2: Publish the Component (Common Step)
-   - id: publish-to-github
-     name: Publish to GitHub
-     action: publish:github
-     input:
-       allowedHosts: ["github.com"]
-       repoUrl: github.com/sgodavar/${{ parameters.componentName }}
-       branch: main
-       repoVisibility: public
-       sourcePath: ./fetch-child-template
+  - id: publish-to-github
+    name: Publish to GitHub
+    action: publish:github
+    input:
+      allowedHosts: ["github.com"]
+      repoUrl: github.com/sgodavar/${{ parameters.componentName }}
+      branch: main
+      repoVisibility: public
+      sourcePath: ./fetch-child-template
