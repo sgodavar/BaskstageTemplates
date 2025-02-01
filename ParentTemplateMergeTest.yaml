@@ -22,7 +22,7 @@ spec:
      name: Select Template Path
      action: roadiehq:utils:render-template
      input:
-     template: |
+      template: |
           {% if parameters.projectType == "frontend" %}
             ./templates/frontend-template.yaml
           {% else %}
