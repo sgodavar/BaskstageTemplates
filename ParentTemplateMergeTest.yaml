@@ -1,0 +1,38 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: parent-template
+  title: Parent Template with Conditional Steps
+  description: A template that includes different steps based on user selection.
+spec:
+  owner: web@example.com
+  type: website
+  parameters:
+    - title: Project Type
+      required: ["projectType"]
+      properties:
+        projectType:
+          type: string
+          enum: ["frontend", "backend"]
+          description: Select the type of project.
+
+  steps:
+    # Step 1: Dynamically Select the Child Template
+    - id: fetch-child-template
+      name: Load Child Template
+      action: fetch:template
+      input:
+        url: ${{ parameters.projectType == "frontend" ? "./templates/frontend-template.yaml" : "./templates/backend-template.yaml" }}
+        values:
+          componentName: ${{ parameters.componentName }}
+
+    # Step 2: Publish the Component (Common Step)
+    - id: publish-to-github
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        repoUrl: github.com/sgodavar/${{ parameters.componentName }}
+        branch: main
+        repoVisibility: public
+        sourcePath: ./fetch-child-template
