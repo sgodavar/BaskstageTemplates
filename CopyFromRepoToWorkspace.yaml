@@ -5,6 +5,8 @@ metadata:
   title: Copy Files from GitHub to Workspace
   description: Copies files from a GitHub repo folder to the local workspace.
 spec:
+  owner: web@example.com
+  type: website
   parameters:
     - title: Repository Information
       required: ["componentName", "repo", "owner", "sourcePath", "destinationPath"]
