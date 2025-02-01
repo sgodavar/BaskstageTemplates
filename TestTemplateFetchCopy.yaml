@@ -59,28 +59,12 @@ spec:
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
           owner: ${{ parameters.owner }}
         
-    - id: copy-extra-files
-      name: Copy Extra Files
-      action: custom:copy-folder
+
+        # Step 1: Create Directory Using Custom Action
+    - id: create-directory
+      name: Create Directory
+      action: custom:mkdir
       input:
-        source: ./infra  # Folder containing extra files
-        target: ./fetch-template  # Copying into the in-memory workspace
-
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts:
-          - github.com
-        description: This is ${{ parameters.component_id }}
-        repoUrl: ${{ parameters.repoUrl }}
-        sourcePath: ./fetch-template
+        path: ./workspace/TempFolder  # Creates a folder inside workspace
 
 
-  output:
-    links:
-      - title: Repository
-        url: ${{ steps.publish.output.remoteUrl }}
-      - title: Open in catalog
-        icon: catalog
-        entityRef: ${{ steps.register.output.entityRef }}
