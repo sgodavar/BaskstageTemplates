@@ -1,14 +1,51 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: copy-from-github
-  title: Copy Files from GitHub to Workspace
-  description: Copies files from a GitHub repo folder to the local workspace.
+  name: create-react-app-template-custom-to-workspace
+  title: Create React App Template-custom-to-workspace
+  description: Create a new CRA website project
+  tags:
+    - react
+    - cra
 spec:
   owner: web@example.com
   type: website
   parameters:
-    - title: Repository Information
+    - title: Provide some simple information
+      required:
+        - component_id
+        - owner
+      properties:
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:field: EntityNamePicker
+        description:
+          title: Description
+          type: string
+          description: Help others understand what this website is for.
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+              
+   - title: Repository Information
       required: ["componentName", "repo", "owner", "sourcePath", "destinationPath"]
       properties:
         componentName:
@@ -27,8 +64,8 @@ spec:
           type: string
           description: Path in the workspace to copy files to.
 
-  steps:
-    # Step 1: Clone and Copy Files from GitHub Repo
+
+  steps:        
     - id: copy-from-github
       name: Copy Files from GitHub
       action: custom:copy-from-github
@@ -38,18 +75,21 @@ spec:
         sourcePath: ${{ parameters.sourcePath }}
         destinationPath: ./workspace/${{ parameters.componentName }}
 
-    # Step 2: Publish the New Component to GitHub
-    - id: publish-to-github
-      name: Publish Component
+    - id: publish
+      name: Publish
       action: publish:github
       input:
-        allowedHosts: ["github.com"]
-        repoUrl: github.com/${{ parameters.owner }}/${{ parameters.componentName }}
-        branch: main
-        repoVisibility: public
+        allowedHosts:
+          - github.com
+        description: This is ${{ parameters.component_id }}
+        repoUrl: ${{ parameters.repoUrl }}
         sourcePath: ./workspace/${{ parameters.componentName }}
+
 
   output:
     links:
       - title: Repository
-        url: https://github.com/${{ parameters.owner }}/${{ parameters.componentName }}
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
