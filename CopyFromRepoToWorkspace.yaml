@@ -45,7 +45,7 @@ spec:
             allowedHosts:
               - github.com
               
-   - title: Repository Information
+    - title: Repository Information
       required: ["componentName", "repo", "owner", "sourcePath", "destinationPath"]
       properties:
         componentName:
