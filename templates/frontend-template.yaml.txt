@@ -1,0 +1,15 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: frontend-template
+  title: Frontend Project Template
+  description: Template for setting up a frontend project.
+spec:
+  owner: web@example.com
+  type: website
+  steps:
+    - id: setup-frontend
+      name: Setup Frontend Project
+      action: run:script
+      input:
+        script: echo "Setting up a frontend project..."

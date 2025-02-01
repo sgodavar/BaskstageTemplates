@@ -1,0 +1,15 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: backend-template
+  title: Backend Project Template
+  description: Template for setting up a backend project.
+spec:
+  owner: web@example.com
+  type: website
+  steps:
+    - id: setup-backend
+      name: Setup Backend Project
+      action: run:script
+      input:
+        script: echo "Setting up a backend project..."
