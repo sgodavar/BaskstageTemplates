@@ -14,6 +14,18 @@ spec:
         componentName:
           type: string
           description: Name of the new component.
+          
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
     - title: Project Type
       required: ["projectType"]
       properties:
@@ -43,7 +55,7 @@ spec:
     action: publish:github
     input:
       allowedHosts: ["github.com"]
-      repoUrl: github.com/sgodavar/${{ parameters.componentName }}
+      repoUrl: ${{ parameters.repoUrl }}
       branch: main
       repoVisibility: public
       sourcePath: ./fetch-child-template
