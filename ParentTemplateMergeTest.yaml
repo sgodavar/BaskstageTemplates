@@ -8,6 +8,12 @@ spec:
   owner: web@example.com
   type: website
   parameters:
+    - title: Component Information
+      required: ["componentName"]
+      properties:
+        componentName:
+          type: string
+          description: Name of the new component.
     - title: Project Type
       required: ["projectType"]
       properties:
