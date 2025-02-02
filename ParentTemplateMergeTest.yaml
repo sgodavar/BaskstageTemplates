@@ -35,9 +35,12 @@ spec:
           description: Select the type of project.
           
   include:
-    - ${{ parameters.projectType == "frontend" 
-        ? './templates/frontend-template.yaml' 
-        : './templates/backend-template.yaml' }}
+    - >-
+        {% if parameters.projectType == "frontend" %}
+          ./templates/frontend-template.yaml
+        {% else %}
+          ./templates/backend-template.yaml
+        {% endif %}
 
 
 
