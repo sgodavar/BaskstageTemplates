@@ -42,9 +42,9 @@ spec:
       input:
         templatePath: >-
           {% if parameters.projectType == "frontend" %}
-            ./templates/frontend-template.yaml
+            https://github.com/sgodavar/BaskstageTemplates/blob/main/templates/frontend-template.yaml
           {% else %}
-            ./templates/backend-template.yaml
+            https://github.com/sgodavar/BaskstageTemplates/blob/main/templates/backend-template.yaml
           {% endif %}
       output:
         loadedSteps: ${{ steps.load-child-template.output.steps }}
