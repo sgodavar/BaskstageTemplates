@@ -34,23 +34,21 @@ spec:
           enum: ["frontend", "backend"]
           description: Select the type of project.
           
-  include:
-    - >-
-        {% if parameters.projectType == "frontend" %}
-          ./templates/frontend-template.yaml
-        {% else %}
-          ./templates/backend-template.yaml
-        {% endif %}
   steps:
-    - id: publish-to-github
-      name: Publish to GitHub
-      action: publish:github
+    # Step 1: Load Steps from the Selected Child Template
+    - id: load-child-template
+      name: Load Child Template Steps
+      action: custom:load-template-steps
       input:
-        allowedHosts: ["github.com"]
-        repoUrl: github.com/my-org/${{ parameters.componentName }}
-        branch: main
-        repoVisibility: public
-        sourcePath: ./workspace/${{ parameters.componentName }}
+        templatePath: >-
+          {% if parameters.projectType == "frontend" %}
+            ./templates/frontend-template.yaml
+          {% else %}
+            ./templates/backend-template.yaml
+          {% endif %}
+
+    # Step 2: Dynamically Inject Steps from the Loaded Template
+    ${{ steps.load-child-template.output.steps | dump }}
 
 
 
