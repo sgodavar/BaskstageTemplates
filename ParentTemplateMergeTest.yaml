@@ -46,11 +46,10 @@ spec:
           {% else %}
             ./templates/backend-template.yaml
           {% endif %}
+      output:
+        loadedSteps: ${{ steps.load-child-template.output.steps }}
 
-    # Step 2: Dynamically Inject Steps from the Loaded Template
-    {% for step in steps.load-child-template.output.steps %}
-    - {{ step | dump }}
-    {% endfor %}
+  dynamicSteps: ${{ steps.load-child-template.output.loadedSteps }}
 
 
 
