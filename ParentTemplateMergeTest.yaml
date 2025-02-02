@@ -33,20 +33,11 @@ spec:
           type: string
           enum: ["frontend", "backend"]
           description: Select the type of project.
+          
+  include:
+    - ${{ parameters.projectType == "frontend" 
+        ? './templates/frontend-template.yaml' 
+        : './templates/backend-template.yaml' }}
 
-  steps:
-    # Step 1: Dynamically Select the Child Template
-  - id: fetch-child-template
-    name: Load Child Template
-    action: fetch:template
-    input:
-      url: >-
-        {% if parameters.projectType == "frontend" %}
-           ./templates/frontend-template.yaml
-        {% else %}
-          ./templates/backend-template.yaml
-        {% endif %}
-      values:
-        componentName: ${{ parameters.componentName }}
 
 
