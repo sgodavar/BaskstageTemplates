@@ -41,6 +41,16 @@ spec:
         {% else %}
           ./templates/backend-template.yaml
         {% endif %}
+  steps:
+    - id: publish-to-github
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        repoUrl: github.com/my-org/${{ parameters.componentName }}
+        branch: main
+        repoVisibility: public
+        sourcePath: ./workspace/${{ parameters.componentName }}
 
 
 
