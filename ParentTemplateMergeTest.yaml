@@ -49,13 +49,4 @@ spec:
       values:
         componentName: ${{ parameters.componentName }}
 
-    # Step 2: Publish the Component (Common Step)
-  - id: publish-to-github
-    name: Publish to GitHub
-    action: publish:github
-    input:
-      allowedHosts: ["github.com"]
-      repoUrl: ${{ parameters.repoUrl }}
-      branch: main
-      repoVisibility: public
-      sourcePath: ./fetch-child-template
+
