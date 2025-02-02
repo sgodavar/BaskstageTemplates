@@ -49,9 +49,9 @@ spec:
       output:
         loadedSteps: ${{ steps.load-child-template.output.steps }}
 
-    {% for step in steps.load-child-template.output.loadedSteps %}
+        {% for step in steps.load-child-template.output.loadedSteps %}
     - {{ step | dump }}
-    {% endfor %}
+        {% endfor %}
 
 
 
