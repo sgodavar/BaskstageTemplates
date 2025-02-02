@@ -49,9 +49,15 @@ spec:
       output:
         loadedSteps: ${{ steps.load-child-template.output.steps }}
 
-    {% for step in steps.load-child-template.output.loadedSteps %}
-    - {{ step | toYaml }}
-    {% endfor %}
+    - id: process-steps
+      name: Process Loaded Steps
+      action: backstage:transform:json
+      input:
+        data: ${{ steps.load-child-template.output.loadedSteps }}
+      output:
+        processedSteps: ${{ steps.process-steps.output }}
+
+  dynamicSteps: ${{ steps.process-steps.output.processedSteps }}
 
 
 
