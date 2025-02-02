@@ -42,7 +42,7 @@ spec:
       input:
         templatePath: >-
           {% if parameters.projectType == "frontend" %}
-            https://github.com/sgodavar/BaskstageTemplates/blob/main/templates/frontend-template.yaml
+            https://raw.githubusercontent.com/sgodavar/BaskstageTemplates/main/templates/frontend-template.yaml
           {% else %}
             https://github.com/sgodavar/BaskstageTemplates/blob/main/templates/backend-template.yaml
           {% endif %}
