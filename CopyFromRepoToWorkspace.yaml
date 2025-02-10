@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: create-react-app-template-custom-to-workspace
-  title: Create React App Template-custom-to-workspace
+  name: create-react-app-template-custom-to-workspaceV2
+  title: Create React App Template-custom-to-workspaceV2
   description: Create a new CRA website project
   tags:
     - react
@@ -46,17 +46,14 @@ spec:
               - github.com
               
     - title: Repository Information
-      required: ["componentName", "repo", "owner", "sourcePath", "destinationPath"]
+      required: ["componentName", "repo", "sourcePath", "destinationPath"]
       properties:
         componentName:
           type: string
           description: Name of the component.
         repo:
           type: string
-          description: GitHub repository name (e.g., `my-repo`).
-        owner:
-          type: string
-          description: GitHub organization or user (e.g., `my-org`).
+          description: GitHub repository link (e.g., `my-repo`).
         sourcePath:
           type: string
           description: Path inside the repo to copy files from (e.g., `templates/base`).
@@ -71,18 +68,18 @@ spec:
       action: custom:copy-from-github
       input:
         repo: ${{ parameters.repo }}
-        owner: ${{ parameters.owner }}
         sourcePath: ${{ parameters.sourcePath }}
         destinationPath: ./workspace/${{ parameters.componentName }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         
     - id: copy-from-github
       name: Copy Files from GitHub
       action: custom:copy-from-github
       input:
         repo: ${{ parameters.repo }}
-        owner: ${{ parameters.owner }}
         sourcePath: temp
         destinationPath: ./workspace/${{ parameters.componentName }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - id: publish
       name: Publish
