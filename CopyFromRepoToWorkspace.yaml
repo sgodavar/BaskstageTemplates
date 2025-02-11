@@ -69,16 +69,16 @@ spec:
       input:
         repo: ${{ parameters.repo }}
         sourcePath: ${{ parameters.sourcePath }}
-        destinationPath: ./workspace/${{ parameters.componentName }}
+        destinationPath: ./workspace/${{ parameters.destinationPath }}
         token: ${{ secrets.GITHUB_TOKEN }}
         
-    - id: copy-from-github
+    - id: copy-from-github2
       name: Copy Files from GitHub
       action: custom:copy-from-github
       input:
         repo: ${{ parameters.repo }}
         sourcePath: temp
-        destinationPath: ./workspace/${{ parameters.componentName }}
+        destinationPath: ./workspace/${{ parameters.destinationPath }}
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - id: publish
