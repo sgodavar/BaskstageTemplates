@@ -71,7 +71,13 @@ spec:
           uniqueItems: true
           ui:widget: checkboxes
 
-  steps:        
+  steps:
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: http
+        catalogInfoPath: "/catalog-info.yaml"
    
 
 
