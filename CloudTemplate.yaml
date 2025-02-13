@@ -59,16 +59,18 @@ spec:
         storage:
           title: Select Storage
           type: string
-          default: Azure Disks
+          default: None
           enum:
             - Azure Disks
+            - None
         database:
           title: Database
           type: string
-          default: Cosmos
+          default: None
           enum:
             - SQL Server
             - Cosmos
+            - None
         otherServices:
           title: Select Additional Services
           type: array
