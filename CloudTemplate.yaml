@@ -64,13 +64,28 @@ spec:
             - Azure Disks
             - None
         database:
-          title: Database
-          type: string
-          default: None
-          enum:
-            - SQL Server
-            - Cosmos
-            - None
+          title: Database Needed
+          type: boolean
+          ui:widget: radio
+      dependencies:
+        database:
+          allOf:
+            - if:
+                properties:
+                  database:
+                    const: true
+              then:
+                properties:
+                  databaseType:          
+                    title: Database Type
+                    type: string
+                    default: None
+                    enum:
+                      - SQL
+                      - NoSql
+                required:
+                  - databaseType
+
         otherServices:
           title: Select Additional Services
           type: array
