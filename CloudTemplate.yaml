@@ -35,6 +35,17 @@ spec:
               - Group              
     - title: Cloud Infromation
       properties:
+        environment:
+          title: Environment Type
+          type: string
+          default: Dev
+          enum:
+            - Dev
+            - Stage
+            - Prod
+          description: Select the environment
+          validation:
+            required: true
         deployment:
           title: Deploy Type
           type: string
