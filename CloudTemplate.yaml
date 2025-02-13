@@ -1,0 +1,84 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: create-cloud-template
+  title: create-cloud-template
+  description: Create a new CRA website project
+  tags:
+    - react
+    - cra
+spec:
+  owner: web@example.com
+  type: website
+  parameters:
+    - title: Provide some simple information
+      required:
+        - component_id
+        - owner
+      properties:
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:field: EntityNamePicker
+        description:
+          title: Description
+          type: string
+          description: Help others understand what this website is for.
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group              
+    - title: Cloud Infromation
+      properties:
+        deployment:
+          title: Deploy Type
+          type: string
+          default: Webapp
+          enum:
+            - Webapp
+            - AKS
+          description: Select the deployment target
+          validation:
+            required: true
+        storage:
+          title: Select Storage
+          type: string
+          default: Azure Disks
+          enum:
+            - Azure Disks
+        database:
+          title: Database
+          type: string
+          default: Cosmos
+          enum:
+            - SQL Server
+            - Cosmos
+        otherServices:
+          title: Select Additional Services
+          type: array
+          items:
+            type: string
+            enum:
+              - 'Key Vault'
+              - 'CDN'
+              - 'App Insights'
+              - 'Load Balancer'
+          uniqueItems: true
+          ui:widget: checkboxes
+
+  steps:        
+   
+
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
