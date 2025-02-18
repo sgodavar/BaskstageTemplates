@@ -64,6 +64,18 @@ spec:
           title: Database Needed
           type: boolean
           ui:widget: radio
+        otherServices:
+          title: Select Additional Services
+          type: array
+          items:
+            type: string
+            enum:
+              - 'Key Vault'
+              - 'CDN'
+              - 'App Insights'
+              - 'Load Balancer'
+          uniqueItems: true
+          ui:widget: checkboxes
       dependencies:
         database:
           allOf:
@@ -116,19 +128,6 @@ spec:
                 required:
                   - storageType
                   - storageTypeSKU
-
-        otherServices:
-          title: Select Additional Services
-          type: array
-          items:
-            type: string
-            enum:
-              - 'Key Vault'
-              - 'CDN'
-              - 'App Insights'
-              - 'Load Balancer'
-          uniqueItems: true
-          ui:widget: checkboxes
 
   steps:
     - id: register
